@@ -1,0 +1,25 @@
+.meal-picture {
+    max-width: 100%;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.meal-tile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.card-body{
+    padding: 20px;
+}
+
+.meal-tile-container:hover {
+    background-color: #d6d4d4;
+}

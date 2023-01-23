@@ -22,7 +22,7 @@ app.get('/api/categories', (req, res) => {
     { url: `${baseURL}/list.php?c=list` },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
+        return res.status(500).json({ type: 'error', message: error });
       }
 
       res.json(JSON.parse(body));
@@ -35,7 +35,7 @@ app.get('/api/ingredients', (req, res) => {
     { url: `${baseURL}/list.php?i=list` },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
+        return res.status(500).json({ type: 'error', message: error });
       }
 
       res.json(JSON.parse(body));
@@ -43,16 +43,57 @@ app.get('/api/ingredients', (req, res) => {
   )
 })
 
-app.get('/api/findmeal', (req, res) => {
+//http://localhost:3001/api/findmeal-name?i=<ingredient>
+app.get('/api/findmeal-ing', (req, res) => {
   let iname = req.query.i || "";
   request(
     { url: `${baseURL}/filter.php?i=${iname}` },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
+        return res.status(500).json({ type: 'error', message: error });
       }
-
+      console.log(JSON.parse(body))
       res.json(JSON.parse(body));
+    }
+  )
+})
+
+const processMeal = (meal) => {
+  const ing = []
+  for (let i = 1; i <= 20; i++) {
+    const ikey = `strIngredient${i}`
+    const mkey = `strMeasure${i}` 
+    //console.log('ing', meal.ikey)
+    if (meal[ikey] != null && 
+        meal[ikey] != "" && 
+        meal[ikey] != ' ') 
+    { 
+      ing.push({
+      [meal[ikey]]: meal[mkey]
+    })}
+  }
+
+  return {
+    id: meal.idMeal,
+    name: meal.strMeal,
+    ingredients: ing,
+    pictureURL: meal.strMealThumb,
+    ytURL: meal.strYoutube
+  }
+}
+
+//http://localhost:3001/api/findmeal-id?id=<id>
+app.get('/api/findmeal-id', (req, res) => {
+  let mid = req.query.id || '';
+  request (
+    { url: `${baseURL}/lookup.php?i=${mid}` },
+    (error, response, body) => {
+      if (error || response.statusCode !== 200) {
+        return res.status(500).json({ type: 'error', message: error });
+      }
+      const data = JSON.parse(body).meals
+      if (data) res.json(processMeal(data[0]));
+      else res.json({})
     }
   )
 })

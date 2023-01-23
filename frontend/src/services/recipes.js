@@ -1,17 +1,13 @@
 import axios from 'axios';
 
-const baseURL = 'http://www.themealdb.com/api/json/v1/1';
-
-const getCategories = () => {
-    const req = axios.get(`${baseURL}/categories.php`);
+const searchMealByIngredient = (ingredient) => {
+    const req = axios.get(`http://localhost:3001/api/findmeal-ing?i=${ingredient}`);
     return req.then(res => res.data);
-    //const categoryData = req.then(res => res.data);
-    //return categoryData;
 }
 
-const callAPITest = (ingredient) => {
-    const req = axios.get(`http://localhost:3001/api/findmeal?i=${ingredient}`);
-    return req.then(res => res);
+const searchMealByID = (id) => {
+    const req = axios.get(`http://localhost:3001/api/findmeal-id?id=${id}`)
+    return req.then(res => res.data)
 }
 
-export default {getCategories, callAPITest};
+export default { searchMealByIngredient, searchMealByID };
