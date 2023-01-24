@@ -10,9 +10,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffffff;
+    background-color:rgb(219, 235, 248);
     border-radius: 10px;
     margin: 20px;
+    padding: 15px;
     cursor: pointer;
 }
 
@@ -23,3 +24,4 @@
 .meal-tile-container:hover {
     background-color: #d6d4d4;
 }
+

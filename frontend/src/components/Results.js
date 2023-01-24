@@ -6,9 +6,8 @@ const MealTile = ({ name, pictureURL, id, mealInfo }) => {
     const [showMore, setShowMore] = useState(false);
     return (
         <div className="meal-tile-container" 
-             onClick={() => setShowMore(!showMore)}
-             onMouseEnter={() => document.querySelector('.meal-tile-container').style.backgroundColor = '#f5f5f5'}
-             onMouseLeave={() => document.querySelector('.meal-tile-container').style.backgroundColor = '#ffffff'}>
+            onClick={() => setShowMore(!showMore)}
+        >
             <img className="meal-picture" src={pictureURL} alt={name} />
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
@@ -23,7 +22,7 @@ const MealTile = ({ name, pictureURL, id, mealInfo }) => {
 }
 
 const MoreInfoPopup = ({ info, show, onClose }) => {
-    return (
+    if (info) return (
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
           <Modal.Title>{info.name}</Modal.Title>
@@ -47,9 +46,13 @@ const MoreInfoPopup = ({ info, show, onClose }) => {
   }
 
   const Results = (props) => {
-    const {meals, mealInfo, hasSearched} = props;
+    const {meals, mealInfo, hasSearched, error } = props;
     if (!hasSearched) return <h4 className="text-center">Look up an ingredient to get started.</h4>
-    else if (!meals || !mealInfo) return <div>Loading...</div>
+    if (error) return (
+        <div className="error-message">
+            <h3>An error occurred.</h3>
+        </div>   
+    )
     else return(
         <div className="d-flex flex-column align-items-center">
             <h5 className="text-center">{`Showing ${meals.length} Results`} </h5>
@@ -69,6 +72,7 @@ const MoreInfoPopup = ({ info, show, onClose }) => {
         </div>
     ) 
 }
+
 
 
 export default Results;

@@ -16,7 +16,7 @@ const FilterDropdown = (props) => {
                 value={currFilter} 
                 onChange={handleChange}
             >
-                <option value="">Filter by</option>
+                <option value="default">Filter by</option>
                 <option value="increasing">Less ingredients</option>
                 <option value="decreasing">More ingredients</option>
             </select>
@@ -26,30 +26,32 @@ const FilterDropdown = (props) => {
 
 const SearchBar = (props) => {
     return (
-        <form onSubmit={props.handleSubmit} className="search-bar-container d-flex align-items-center">
-            <div className="form-group">
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Search..." 
-                    value={props.query} 
-                    onChange={props.searchChange} 
-                />
-                <div className="d-flex justify-content-center align-items-center">
-                    <div>
-                        <FilterDropdown 
-                            currFilter={props.currFilter} 
-                            setCurrFilter={props.setCurrFilter}
-                        />
-                    </div>
-                    <div>
-                        <button className="btn btn-primary" type="submit">
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
+        <div className="outer-search-bar-container">
+            <form onSubmit={props.handleSubmit} className="search-bar-container d-flex align-items-center">
+                <div className="form-group">
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder="Search..." 
+                        value={props.query} 
+                        onChange={props.searchChange} 
+                    />
+                    <div className="d-flex justify-content-center align-items-center">
+                        <div>
+                            <FilterDropdown 
+                                currFilter={props.currFilter} 
+                                setCurrFilter={props.setCurrFilter}
+                            />
+                        </div>
+                        <div>
+                            <button className="btn btn-primary" type="submit">
+                                <FontAwesomeIcon icon={faSearch} />
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     )
 }
 
