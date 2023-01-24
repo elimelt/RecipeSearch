@@ -17,6 +17,9 @@ app.use((req, res, next) => {
   next();
 });
 
+//server baseURL
+// dev   http://localhost:3001/
+// production    https://recipe-search-wrapper-server.onrender.com/
 
 //http://localhost:3001/api/findmeal-name?i=<ingredient>
 app.get('/api/findmeal-ing', (req, res) => {

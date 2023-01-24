@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-//const baseURL = 'http://www.themealdb.com/api/json/v1/1';
+const baseURL = 'https://recipe-search-wrapper-server.onrender.com';
 
 
 const searchMealByIngredient = (ingredient) => {
-    const req = axios.get(`http://localhost:3001/api/findmeal-ing?i=${ingredient}`);
+    const req = axios.get(`${baseURL}/api/findmeal-ing?i=${ingredient}`);
     return req.then(res => res.data);
 }
 
 const searchMealByID = (id) => {
-    const req = axios.get(`http://localhost:3001/api/findmeal-id?id=${id}`)
+    const req = axios.get(`${baseURL}/api/findmeal-id?id=${id}`)
     return req.then(res => res.data)
 }
 
