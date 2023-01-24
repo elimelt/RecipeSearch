@@ -4,6 +4,7 @@ const axios = require('axios');
 const app = express();
 const cors = require('cors')
 
+
 app.use(cors());
 
 const baseURL = 'http://www.themealdb.com/api/json/v1/1';
@@ -16,32 +17,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.get('/api/categories', (req, res) => {
-  request(
-    { url: `${baseURL}/list.php?c=list` },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: error });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  )
-})
-
-app.get('/api/ingredients', (req, res) => {
-  request(
-    { url: `${baseURL}/list.php?i=list` },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: error });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  )
-})
 
 //http://localhost:3001/api/findmeal-name?i=<ingredient>
 app.get('/api/findmeal-ing', (req, res) => {
@@ -102,7 +77,7 @@ app.get('/api/findmeal-id', (req, res) => {
 
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

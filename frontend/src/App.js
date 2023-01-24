@@ -112,6 +112,7 @@ const filterMeals = (meals, mealInfoBuffer, currentFilter, sortFunctions) => {
           error={error}
         />}
       </div>
+      
     </div>
   );
 }
