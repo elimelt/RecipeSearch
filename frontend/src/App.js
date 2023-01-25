@@ -2,7 +2,6 @@ import SearchBar from './components/SearchBar'
 import Results from './components/Results'
 import Title from './components/Title'
 import {useEffect, useState} from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
 import './App.css';
 import recipeService from './services/recipes'
 
@@ -10,7 +9,6 @@ import recipeService from './services/recipes'
 
 
 const App = () => {
-  // State variables
   const [query, setQuery] = useState("")
   const [hasSearched, setHasSearched] = useState(false)
   const [meals, setMeals] = useState([])
@@ -29,7 +27,6 @@ const App = () => {
   // UseEffect to re-sort meals when the current filter changes
   useEffect(() => {
     let mealBuffer = meals.slice()
-    console.log('filtering', currFilter)
     setMeals(mealBuffer.sort(filters[currFilter]))
   }, [currFilter])
 
@@ -72,7 +69,7 @@ const App = () => {
         setLoading(false)
     }
 }
-console.log(currFilter)
+
 
 // returns filtered meals with numIngredients added 
 const filterMeals = (meals, mealInfoBuffer, currentFilter, sortFunctions) => {

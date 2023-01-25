@@ -4,13 +4,18 @@ import './Results.css'
 
 const MealTile = ({ name, pictureURL, id, mealInfo }) => {
     const [showMore, setShowMore] = useState(false);
+    console.log(name, pictureURL)
+  console.log('hello test')
+    const titleCard = (name.length < 30) ? 
+      <h5 className="card-title">{name}</h5> :
+      <h5 className="card-title">{`${name.substring(0, 27)}...`}</h5>
     return (
         <div className="meal-tile-container" 
             onClick={() => setShowMore(!showMore)}
         >
             <img className="meal-picture" src={pictureURL} alt={name} />
             <div className="card-body">
-                <h5 className="card-title">{name}</h5>
+                {titleCard}
             </div>
             <MoreInfoPopup
                 show={showMore}
@@ -28,6 +33,7 @@ const MoreInfoPopup = ({ info, show, onClose }) => {
           <Modal.Title>{info.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+
           <ul>
             {info.ingredients.map((ing, i) => {
               let name = Object.keys(ing)[0];
